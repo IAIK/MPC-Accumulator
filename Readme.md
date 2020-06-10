@@ -1,6 +1,6 @@
 # MPC-Accumulator
 
-This repository contains the source code of the paper [1] by researchers of TU Graz. A current version of the paper will also be added to this repository. We implemented our work in two MPC Frameworks, MP-SPDZ (https://github.com/data61/MP-SPDZ) and FRESCO (https://github.com/aicis/fresco).
+This repository contains the source code of the paper [1] by researchers of TU Graz and the Austrian Institute of Technology (AIT). A current version of the paper will also be added to this repository. We implemented our work in two MPC Frameworks, MP-SPDZ (https://github.com/data61/MP-SPDZ) and FRESCO (https://github.com/aicis/fresco).
 
 ## MP-SPDZ
 
