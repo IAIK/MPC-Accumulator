@@ -10,6 +10,7 @@ The source code of the MPC-Accumulator can be found in `MP-SPDZ/MPC-ACC`
 ### Compilation:
 Execute the following commands to compile the source code:
 ```
+git submodule update --init
 cd MP-SPDZ
 
 cd relic
@@ -26,17 +27,17 @@ make bench_plain
 ```
 
 ### Execution
-Compilation will add the following executables:
-`MP-SPDZ/mascot-mpcacc-party.x`
-`MP-SPDZ/semi-mpcacc-party.x`
-`MP-SPDZ/benchmarkmascot-mpcacc-party.x`
-`MP-SPDZ/benchmarksemi-mpcacc-party.x`
-`MP-SPDZ/bench_plain`
+Compilation will add the following executables in the `MP-SPDZ` folder:
+`mascot-mpcacc-party.x`
+`semi-mpcacc-party.x`
+`benchmarkmascot-mpcacc-party.x`
+`benchmarksemi-mpcacc-party.x`
+`bench_plain`
 
 The *-mpcacc-party.x executables offer the same interface:
-`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./relic/install/usr/local/lib/ ./-mpcacc-party.x -p 0 [-N <number of parties>] [-h <host of party 0>]`
+`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./relic/install/usr/local/lib/ ./-mpcacc-party.x -p <party-id 0 to N - 1> [-N <number of parties>] [-h <host of party 0>]`
 
-Note: Follow instructions in benchmarks source code for benchmarks of the different phases of the MPC protocol
+Note: Follow instructions in the benchmarks source code for benchmarks of the different phases of the MPC protocol.
 
 ## Citing our work:
 We will add a BibTex entry once the paper is published.
