@@ -15,13 +15,12 @@ The following binaries have been used for the paper:
 | --- | --- |
 | MASCOT | `mascot-mpcacc-party.x` |
 | Semi-honest OT | `semi-mpcacc-party.x` |
-| Benchmark | `benchmark-mpcacc-party.x` |
 
 All binaries offer the same interface. With MASCOT for example, run
 the following:
 ```
-./mascot-mpcacc-party.x -p 0 [-N <number of parties>] [-h <host of party 0>] [<number of prep tuples>]
-./mascot-mpcacc-party.x -p 1 [-N <number of parties>] [-h <host of party 0<][<number of prep tuples>]
+./mascot-mpcacc-party.x -p 0 [-N <number of parties>] [-h <host of party 0>]
+./mascot-mpcacc-party.x -p 1 [-N <number of parties>] [-h <host of party 0<]
 ...
 ```
 
