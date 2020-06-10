@@ -1,0 +1,16 @@
+/*
+ * mal-shamir-bmr-party.cpp
+ *
+ */
+
+#include "Machines/ShamirMachine.cpp"
+
+#include "BMR/RealProgramParty.hpp"
+#include "Math/Z2k.hpp"
+
+int main(int argc, const char** argv)
+{
+	ez::ezOptionParser opt;
+	ShamirOptions::singleton = {opt, argc, argv};
+	RealProgramParty<MaliciousShamirShare<gf2n_long>>(argc, argv);
+}

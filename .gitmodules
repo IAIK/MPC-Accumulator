@@ -1,0 +1,9 @@
+[submodule "MP-SPDZ/mpir"]
+	path = MP-SPDZ/mpir
+	url = https://github.com/wbhart/mpir
+[submodule "MP-SPDZ/SimpleOT"]
+	path = MP-SPDZ/SimpleOT
+	url = https://github.com/mkskeller/SimpleOT/
+[submodule "MP-SPDZ/relic"]
+	path = MP-SPDZ/relic
+	url = https://github.com/relic-toolkit/relic.git
