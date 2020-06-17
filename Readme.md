@@ -1,11 +1,11 @@
 # MPC-Accumulator
 
-This repository contains the source code of the paper [1] by researchers of TU Graz and the Austrian Institute of Technology (AIT). A current version of the paper will also be added to this repository. We implemented our work in two MPC Frameworks, MP-SPDZ (https://github.com/data61/MP-SPDZ) and FRESCO (https://github.com/aicis/fresco).
+This repository contains the source code of the paper [1] by researchers of TU Graz and the Austrian Institute of Technology (AIT). A current version of the paper is also present in this repository. We implemented our work in two MPC Frameworks, MP-SPDZ (https://github.com/data61/MP-SPDZ) and FRESCO (https://github.com/aicis/fresco).
 
 ## MP-SPDZ
 
 ### Source Code:
-The source code of the MPC-Accumulator can be found in `MP-SPDZ/MPC-ACC`. We use the RELIC toolkit (https://github.com/relic-toolkit/relic) for elliptic curve implementations. RELIC is included as submodule in this project. 
+The source code of the MPC-Accumulator can be found in `MP-SPDZ/MPC-ACC`. We use the RELIC toolkit (https://github.com/relic-toolkit/relic) for elliptic curve implementations. RELIC is included as submodule in this project.
 
 ### Compilation:
 Execute the following commands to compile the source code:
@@ -50,7 +50,7 @@ Since we needed to adapt the SPDZ protocol to be able to run elliptic curve oper
 The project is developed using maven. When using maven as a build manager, one has to install the ECCelerate .jar file in the local maven repository using the following command:
 ```
 mvn install:install−file −Dfile=<path−to−file> −DgroupId=<group−id> −DartifactId=<artifact−id> −Dversion=<version> −Dpackaging=<packaging>
-``` 
+```
 * <path-to-file> has to specify the path to the .jar file (the java archive)
 * <group-id> has to specify the group, in our case **iaik**.
 * <artifact-id> the name under which the artifact will be installed: **iaik_eccelerate** for the ECC library.
@@ -77,7 +77,21 @@ so that the `run` target will find it later.
 
 
 ## Citing our work:
-We will add a BibTex entry once the paper is published.
+Please use the following BibTeX entry to cite our work in academic papers.
+
+```tex
+@article{MPCAcc,
+  author    = {Lukas Helminger and
+               Daniel Kales and
+               Sebastian Ramacher and
+               Roman Walch},
+  title     = {Multi-Party Revocation in Sovrin: {P}erformance through Distributed Trust},
+  journal   = {{IACR} Cryptol. ePrint Arch.},
+  volume    = {2020},
+  pages     = {724},
+  year      = {2020}
+}
+```
 
 
-[1] not yet public
+[1] https://eprint.iacr.org/2020/724
