@@ -213,6 +213,14 @@ void to_signed_bigint(bigint& ans, const gfp& x)
         ans -= gfp::pr();
 }
 
+void to_signed_bigint(bigint& ans, const gfp100& x)
+{
+    to_bigint(ans, x);
+    // get sign and abs(x)
+    if (mpz_cmp(ans.get_mpz_t(), gfp100::get_ZpD().pr_half.get_mpz_t()) > 0)
+        ans -= gfp100::pr();
+}
+
 template class gfp_<0, GFP_MOD_SZ>;
 template class gfp_<1, GFP_MOD_SZ>;
 template class gfp_<2, 4>;

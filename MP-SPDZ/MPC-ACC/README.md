@@ -1,6 +1,5 @@
-This directory contains the code used for the benchmarks by [Kales
-et al.](paper coming soon) `*-mpcacc-party.cpp`
-contains the high-level programs while the two phases are implemented
+This directory contains the code used for the benchmarks. `*-mpcacc-party.cpp`
+contains the high-level programs while the accumulator is implemented
 in MPCAcc.h
 
 #### Compilation
@@ -15,6 +14,15 @@ The following binaries have been used for the paper:
 | --- | --- |
 | MASCOT | `mascot-mpcacc-party.x` |
 | Semi-honest OT | `semi-mpcacc-party.x` |
+| Malicious Shamir | `mal-shamir-mpcacc-party.x` |
+| Semi-Honest Shamir | `shamir-mpcacc-party.x` |
+
+Additionally, there are binaries for replicated threshold sharing:
+
+| Protocol | Binary |
+| --- | --- |
+| Malicious replicated | `mal-rep-mpcacc-party.x` |
+| Semi-honest replicated | `rep-mpcacc-party.x` |
 
 All binaries offer the same interface. With MASCOT for example, run
 the following:
@@ -24,4 +32,3 @@ the following:
 ...
 ```
 
-The number of parties defaults to 2 for OT-based protocols

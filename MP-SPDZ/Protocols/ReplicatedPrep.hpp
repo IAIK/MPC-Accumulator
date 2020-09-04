@@ -251,6 +251,30 @@ void buffer_bits_from_squares(RingPrep<T<gfp>>& prep)
 }
 
 template<template<class U> class T>
+void buffer_bits_from_squares(RingPrep<T<gfp100>>& prep)
+{
+    auto proc = prep.get_proc();
+    assert(proc != 0);
+    auto& bits = prep.get_bits();
+    vector<array<T<gfp100>, 2>> squares(prep.buffer_size);
+    vector<T<gfp100>> s;
+    for (int i = 0; i < prep.buffer_size; i++)
+    {
+        prep.get_two(DATA_SQUARE, squares[i][0], squares[i][1]);
+        s.push_back(squares[i][1]);
+    }
+    vector<gfp100> open;
+    proc->MC.POpen(open, s, proc->P);
+    auto one = T<gfp100>::constant(1, proc->P.my_num(), proc->MC.get_alphai());
+    for (size_t i = 0; i < s.size(); i++)
+        if (open[i] != 0)
+            bits.push_back((squares[i][0] / open[i].sqrRoot() + one) / 2);
+    squares.clear();
+    if (bits.empty())
+        throw runtime_error("squares were all zero");
+}
+
+template<template<class U> class T>
 void buffer_bits_spec(ReplicatedPrep<T<gfp>>& prep, vector<T<gfp>>& bits,
     typename T<gfp>::Protocol& prot)
 {
@@ -259,6 +283,17 @@ void buffer_bits_spec(ReplicatedPrep<T<gfp>>& prep, vector<T<gfp>>& bits,
         buffer_bits_from_squares(prep);
     else
         prep.ReplicatedRingPrep<T<gfp>>::buffer_bits();
+}
+
+template<template<class U> class T>
+void buffer_bits_spec(ReplicatedPrep<T<gfp100>>& prep, vector<T<gfp100>>& bits,
+    typename T<gfp100>::Protocol& prot)
+{
+    (void) bits, (void) prot;
+    if (prot.get_n_relevant_players() > 10)
+        buffer_bits_from_squares(prep);
+    else
+        prep.ReplicatedRingPrep<T<gfp100>>::buffer_bits();
 }
 
 template<class T>

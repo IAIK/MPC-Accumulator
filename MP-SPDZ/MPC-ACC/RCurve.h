@@ -15,6 +15,16 @@
 extern "C" {
     #include <relic/relic_epx.h>
 }
+
+#ifdef SEED
+#undef SEED
+#endif
+
+#ifdef HASHD
+#undef HASHD
+#endif
+
+
 #ifdef ALIGN
 #undef ALIGN
 #endif
@@ -168,7 +178,7 @@ namespace osuCrypto
         static char type_char() { return 'G'; }
         // end for sharing
 
-        REccPoint() { ep_new(mVal); };
+        REccPoint() { ep_new(mVal); assign_zero(); };
         REccPoint(const Scalar& other);
         REccPoint(int other);
         REccPoint(const REccPoint& copy) { ep_new(mVal); ep_copy(*this, copy); }
@@ -237,7 +247,7 @@ namespace osuCrypto
         static char type_char() { return 'G'; }
         // end for sharing
 
-        REccPairingPoint() { ep2_new(mVal); };
+        REccPairingPoint() { ep2_new(mVal); assign_zero(); };
         REccPairingPoint(const Scalar& other);
         REccPairingPoint(int other);
         REccPairingPoint(const REccPairingPoint& copy) { ep2_new(mVal); ep2_copy(*this, const_cast<REccPairingPoint&>(copy)); }

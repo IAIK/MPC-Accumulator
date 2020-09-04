@@ -160,6 +160,12 @@ inline void CowGearPrep<CowGearShare<gfp>>::buffer_bits()
 }
 
 template<>
+inline void CowGearPrep<CowGearShare<gfp100>>::buffer_bits()
+{
+    buffer_bits_from_squares(*this);
+}
+
+template<>
 inline void CowGearPrep<CowGearShare<gf2n_short>>::buffer_bits()
 {
     buffer_bits_without_check();

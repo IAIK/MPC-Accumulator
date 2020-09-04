@@ -199,8 +199,12 @@ mascot-ecdsa-party.x: $(OT) $(LIBSIMPLEOT)
 
 semi-mpcacc-party.x: $(OT) $(LIBSIMPLEOT) GC/SemiPrep.o
 mascot-mpcacc-party.x: $(OT) $(LIBSIMPLEOT)
+shamir-mpcacc-party.x: Machines/ShamirMachine.o
+mal-shamir-mpcacc-party.x: Machines/ShamirMachine.o
 benchmarksemi-mpcacc-party.x: $(OT) $(LIBSIMPLEOT) GC/SemiPrep.o
 benchmarkmascot-mpcacc-party.x: $(OT) $(LIBSIMPLEOT) GC/SemiPrep.o
+benchmarkshamir-mpcacc-party.x: Machines/ShamirMachine.o
+benchmarkmal-shamir-mpcacc-party.x: Machines/ShamirMachine.o
 
 $(LIBSIMPLEOT): SimpleOT/Makefile
 	$(MAKE) -C SimpleOT

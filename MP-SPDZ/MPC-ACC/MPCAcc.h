@@ -2,7 +2,7 @@
 
 #include "Processor/Data_Files.h"
 
-#include "RCurve.h"
+#include "ECExtension.h"
 
 // #define DEBUG_MPCACC
 
@@ -39,6 +39,8 @@ namespace MPC_ACC
     typename ppShare::Direct_MC MCpp;
     Player& P;
     int batchsize;
+
+    sShare getRandom(SubProcessor<sShare>& proc);
 
     sShare sk_share;
     REccPairingPoint pk;
@@ -212,43 +214,18 @@ namespace MPC_ACC
 
   //----------------------------------------------------------------------
 
-  // SemiShare
-  SemiShare<REccPoint> mul(const osuCrypto::REccPoint& lhs, SemiShare<REccPoint::Scalar>& rhs)
-  {
-    SemiShare<REccPoint> r = lhs * rhs;
-    return r;
-  }
-
-  // SemiShare
-  SemiShare<REccPairingPoint> mul(const osuCrypto::REccPairingPoint& lhs, SemiShare<REccPairingPoint::Scalar>& rhs)
-  {
-    SemiShare<REccPairingPoint> r = lhs * rhs;
-    return r;
-  }
-
-  // mascot
-  Share<REccPoint> mul(const osuCrypto::REccPoint& lhs, Share<REccPoint::Scalar>& rhs)
-  {
-    Share<REccPoint> r;
-    r.set_share(lhs * rhs.get_share());
-    r.set_mac(lhs * rhs.get_mac());
-    return r;
-  }
-
-  // mascot
-  Share<REccPairingPoint> mul(const osuCrypto::REccPairingPoint& lhs, Share<REccPairingPoint::Scalar>& rhs)
-  {
-    Share<REccPairingPoint> r;
-    r.set_share(lhs * rhs.get_share());
-    r.set_mac(lhs * rhs.get_mac());
-    return r;
-  }
-
-  //----------------------------------------------------------------------
-
   template<template<class U> class T>
   Acc<T>::Acc(REllipticCurve& curve, SubProcessor<sShare>& proc, int batchsize) : curve(curve), proc(proc), MCp(proc.MC.get_alphai()), MCpp(proc.MC.get_alphai()), P(proc.P), batchsize(batchsize)
   {
+  }
+
+  template<template<class U> class T>
+  typename Acc<T>::sShare Acc<T>::getRandom(SubProcessor<sShare>& proc)
+  {
+    sShare out,_;
+    auto& prep = proc.DataF;
+    prep.get_two(DATA_INVERSE, out, _);
+    return out;
   }
 
   template<template<class U> class T>
@@ -265,6 +242,7 @@ namespace MPC_ACC
   #endif
     if (n_inverses)
     {
+      prep.buffer_triples();
       OnlineOptions::singleton.batch_size = n_inverses;
       prep.buffer_inverses();
       OnlineOptions::singleton.batch_size = batchsize;
@@ -326,10 +304,7 @@ namespace MPC_ACC
     timer.start();
     auto stats = P.comm_stats;
 #endif
-    auto& prep = proc.DataF;
-
-    sShare _;
-    prep.get_two(DATA_INVERSE, sk_share, _);
+    sk_share = getRandom(proc);
 
     ppShare pk_share = mul(curve.getPairingGenerator(), sk_share);
     pk = MCpp.open(pk_share, P);
@@ -351,12 +326,10 @@ namespace MPC_ACC
     timer.start();
     auto stats = P.comm_stats;
   #endif
-    auto& prep = proc.DataF;
     auto& protocol = proc.protocol;
     auto alpha_i = proc.MC.get_alphai();
 
-    sShare r,_;
-    prep.get_two(DATA_INVERSE, r, _);
+    sShare r = getRandom(proc);
 
     aux.init(elements);
 
@@ -417,7 +390,6 @@ namespace MPC_ACC
     timer.start();
     auto stats = P.comm_stats;
   #endif
-    auto& prep = proc.DataF;
     auto& protocol = proc.protocol;
     auto alpha_i = proc.MC.get_alphai();
 
@@ -433,8 +405,7 @@ namespace MPC_ACC
 
     sShare q = sk_share + sShare::constant(el, P.my_num(), alpha_i);
 
-    sShare r,_;
-    prep.get_two(DATA_INVERSE, r, _);
+    sShare r = getRandom(proc);
 
     protocol.init_mul(&proc);
     protocol.prepare_mul(r, q);
@@ -525,7 +496,6 @@ namespace MPC_ACC
     timer.start();
     auto stats = P.comm_stats;
   #endif
-    auto& prep = proc.DataF;
     auto& protocol = proc.protocol;
     auto alpha_i = proc.MC.get_alphai();
 
@@ -541,8 +511,7 @@ namespace MPC_ACC
 
     sShare q = sk_share + sShare::constant(el, P.my_num(), alpha_i);
 
-    sShare r,_;
-    prep.get_two(DATA_INVERSE, r, _);
+    sShare r = getRandom(proc);
 
     protocol.init_mul(&proc);
     protocol.prepare_mul(r, q);
@@ -573,7 +542,6 @@ namespace MPC_ACC
     timer.start();
     auto stats = P.comm_stats;
   #endif
-    auto& prep = proc.DataF;
     auto& protocol = proc.protocol;
     auto alpha_i = proc.MC.get_alphai();
 
@@ -589,7 +557,7 @@ namespace MPC_ACC
 
     typename Auxillary<T>::UPDATE op = aux.getUpdate();
     Acc::Wit w = wit.getWitness();
-    sShare q, r ,_;
+    sShare q, r;
     q = sk_share + sShare::constant(el, P.my_num(), alpha_i);
     pShare wit_share;
     REllipticCurve::Scalar sigma;
@@ -604,7 +572,7 @@ namespace MPC_ACC
         MCp.Check(P);
         break;
       case Auxillary<T>::UPDATE::Delete:
-        prep.get_two(DATA_INVERSE, r, _);
+        r = getRandom(proc);
 
         protocol.init_mul(&proc);
         protocol.prepare_mul(r, q);

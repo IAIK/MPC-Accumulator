@@ -66,7 +66,7 @@ class gfp_
   static void read_setup(int nparties, int lg2p, int gf2ndegree)
     { ::read_setup(nparties, lg2p, gf2ndegree); }
 
-  static bigint pr()   
+  static bigint pr()
     { return ZpD.pr; }
   static int t()
     { return L;  }
@@ -91,7 +91,7 @@ class gfp_
 
   void assign(const gfp_& g) { a=g.a; }
   void assign_zero()        { assignZero(a,ZpD); }
-  void assign_one()         { assignOne(a,ZpD); } 
+  void assign_one()         { assignOne(a,ZpD); }
   void assign(word aa)      { bigint::tmp=aa; to_gfp(*this,bigint::tmp); }
   void assign(long aa)
   {
@@ -112,7 +112,7 @@ class gfp_
 
   // Assumes prD behind x is equal to ZpD
   void assign(modp_<L>& x) { a=x; }
-  
+
   gfp_()              { assignZero(a,ZpD); }
   template<int LL>
   gfp_(const modp_<LL>& g) { a=g; }
@@ -194,7 +194,7 @@ class gfp_
     { Inv(a,a,ZpD); }
   void invert(const gfp_& aa)
     { Inv(a,aa.a,ZpD); }
-  void negate() 
+  void negate()
     { Negate(a,a,ZpD); }
   void power(long i)
     { Power(a,a,i,ZpD); }
@@ -221,7 +221,7 @@ class gfp_
       return s;
     }
 
-  /* Bitwise Ops 
+  /* Bitwise Ops
    *   - Converts gfp args to bigints and then converts answer back to gfp
    */
   void AND(const gfp_& x,const gfp_& y);
@@ -271,6 +271,7 @@ typedef gfp_<100, 4> gfp100;
 typedef gfp_<101, 4> gfp101;
 
 void to_signed_bigint(bigint &ans, const gfp &x);
+void to_signed_bigint(bigint &ans, const gfp100 &x);
 
 template<int X, int L>
 Zp_Data gfp_<X, L>::ZpD;
