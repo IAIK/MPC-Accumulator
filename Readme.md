@@ -75,6 +75,13 @@ clean installation, execute the command `make build`. This command will install 
 ECC library, and the demonstrator. Then the assembled jar file will be put in a specific folder
 so that the `run` target will find it later.
 
+## Acknowledgements
+
+![Safe-DEED Logo](https://github.com/IAIK/MPC-Accumulator/blob/master/Safe-DEED_logo.png)
+
+This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 825225.
+
+https://safe-deed.eu/
 
 ## Citing our work:
 Please use the following BibTeX entry to cite our work in academic papers.
