@@ -87,17 +87,21 @@ https://safe-deed.eu/
 Please use the following BibTeX entry to cite our work in academic papers.
 
 ```tex
-@article{MPCAcc,
+@inproceedings{MPCAcc,
   author    = {Lukas Helminger and
                Daniel Kales and
                Sebastian Ramacher and
                Roman Walch},
-  title     = {Multi-Party Revocation in Sovrin: {P}erformance through Distributed Trust},
-  journal   = {{IACR} Cryptol. ePrint Arch.},
-  volume    = {2020},
-  pages     = {724},
-  year      = {2020}
+  title     = {Multi-party Revocation in Sovrin: Performance through Distributed
+               Trust},
+  booktitle = {{CT-RSA}},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12704},
+  pages     = {527--551},
+  publisher = {Springer},
+  year      = {2021}
 }
+
 ```
 
 
